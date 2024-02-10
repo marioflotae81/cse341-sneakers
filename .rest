@@ -1,0 +1,48 @@
+// Localhost Routes
+### Home
+GET http://localhost:4002 HTTP/1.1
+
+### Fetch All Sneakers Route
+GET http://localhost:4002/sneakers HTTP/1.1
+
+### Fetch One doc - The Wayvees
+GET http://localhost:4002/sneakers/65c66333b950080db8ebe2ab HTTP/1.1
+
+### Create New Sneaker doc in DB
+POST http://localhost:4002/sneakers HTTP/1.1
+content-type: application/json
+
+{
+  "Name": "Lowland CC Serio Collection",
+  "Brand": "Vans",
+  "Color": "Marshmallow and Blue",
+  "PictureURL": "no-pic.png",
+  "Size": "10.5",
+  "Collab": true,
+  "Description": "Part of the serio collection"
+}
+
+
+// Render Routes
+### Home
+GET https://cse341-sneakers.onrender.com HTTP/1.1
+
+### Fetch All Sneakers Route
+GET https://cse341-sneakers.onrender.com/sneakers HTTP/1.1
+
+### Fetch one Doc - Disney x Vans Knu Skools
+GET https://cse341-sneakers.onrender.com/sneakers/65c66333b950080db8ebe2ac HTTP/1.1
+
+### Create New Sneaker doc in DB
+POST https://cse341-sneakers.onrender.com/sneakers HTTP/1.1
+content-type: application/json
+
+{
+  "Name": "Air Jordan 1 High Handcrafted",
+  "Brand": "Nike",
+  "Color": "Brown/Green/White",
+  "PictureURL": "no-pic.png",
+  "Size": "11",
+  "Collab": false,
+  "Description": "Released in 2022, part of the Mbappe collection"
+}
