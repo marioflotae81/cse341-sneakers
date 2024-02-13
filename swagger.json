@@ -5,7 +5,7 @@
     "description": "Week 5-8 Personal Project",
     "version": "1.0.0"
   },
-  "host": "localhost:4002",
+  "host": "localhost:4003",
   "basePath": "/",
   "schemes": [
     "http"
@@ -13,7 +13,7 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "Home page - For testing purposes.",
         "responses": {
           "200": {
             "description": "OK"
@@ -23,7 +23,7 @@
     },
     "/sneakers/": {
       "get": {
-        "description": "",
+        "description": "Get all sneakers from the sneakers collection.",
         "responses": {
           "200": {
             "description": "OK"
@@ -34,7 +34,7 @@
         }
       },
       "post": {
-        "description": "",
+        "description": "Save new Sneaker into the sneakers collection.",
         "parameters": [
           {
             "name": "body",
@@ -78,19 +78,11 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "delete": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
       }
     },
     "/sneakers/{id}": {
       "get": {
-        "description": "",
+        "description": "Fetch a single document (sneaker) from the DB based on the given ID.",
         "parameters": [
           {
             "name": "id",
@@ -112,23 +104,62 @@
         }
       },
       "put": {
-        "description": "",
+        "description": "Update a document based on the given id.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "example": "any"
+                },
+                "Brand": {
+                  "example": "any"
+                },
+                "Color": {
+                  "example": "any"
+                },
+                "PictureURL": {
+                  "example": "any"
+                },
+                "Size": {
+                  "example": "any"
+                },
+                "Collab": {
+                  "example": "any"
+                },
+                "Description": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "",
+        "description": "Delete one single document from the sneakers collection.",
         "parameters": [
           {
             "name": "id",
@@ -140,6 +171,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

@@ -5,7 +5,7 @@ const doc = {
         title: 'Project 02',
         description: 'Week 5-8 Personal Project'
     },
-    host: 'localhost:4002',
+    host: 'localhost:4003',
     schemes: ['http']
 };
 

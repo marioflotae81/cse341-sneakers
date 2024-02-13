@@ -16,7 +16,5 @@ routes.put('/:id', controllers.updateRoute);
 // Delete ONE doc
 routes.delete('/:id', controllers.deleteOneRoute);
 
-// Delete All docs
-routes.delete('/', controllers.deleteAllRoute)
 
 module.exports = routes;

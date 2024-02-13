@@ -5,7 +5,7 @@ const { connectToMongoDB } = require('./db/index');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 
-const port = process.env.PORT || 4002;
+const port = process.env.PORT || 4003;
 
 app
     .use(cors())
