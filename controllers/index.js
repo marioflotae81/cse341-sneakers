@@ -79,14 +79,15 @@ const postRoute = async (req, res) => {
 };
 
 const updateRoute = async (req, res) => {
-    if (!req.params.id) {
-        res.status(404).json({
-            error: 'Resource not found. ID is missing.'
+    const id = req.params.id
+    if (id.length !== 24) {
+        return res.status(404).json({
+            error: 'Not a valid ID.'
         });
     }
 
-    if (!req.body) {
-        res.status(400).json({
+    if (!req.body.Name) {
+        return res.status(400).json({
             error: 'Bad Request. No data provided.'
         })
     }
@@ -106,23 +107,23 @@ const updateRoute = async (req, res) => {
         const result = await updateSneaker(req.params.id, sneaker);
 
         if (result.modifiedCount > 0) {
-            res.status(200).json({ message: "Sneaker was updated Successfully." })
+            return res.status(200).json({ message: "Sneaker was updated Successfully." })
         } else {
-            res.status(400).json({ error: "Something went wrong :/" })
+            return res.status(400).json({ error: "Something went wrong :/" })
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Internal Server Error.'
         });
     }
 };
 
 const deleteOneRoute = async (req, res) => {
-    const id = req.params.id;
-    if (!id) {
-        res.status(400).json({
-            error: 'No valid ID.'
+    const id = req.params.id
+    if (id.length !== 24) {
+        return res.status(404).json({
+            error: 'Not a valid ID.'
         });
     }
 
@@ -130,13 +131,13 @@ const deleteOneRoute = async (req, res) => {
         const result = await deleteSneaker(id);
 
         if (result.deletedCount === 1) {
-            res.status(200).json({ message: "Doc was deleted successfully." })
+            return res.status(200).json({ message: "Doc was deleted successfully." })
         } else {
-            res.status(400).json({ error: "Something went wrong, sorry." })
+            return res.status(400).json({ error: "Something went wrong, sorry." })
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Internal Server Error.'
         });
     }
