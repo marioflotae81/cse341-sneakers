@@ -4,7 +4,7 @@ const app = express();
 const { connectToMongoDB } = require('./db/index');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
-const session = require('express-session');
+const session = require('cookie-session');
 const passport = require('passport');
 require('./passport');
 require('dotenv').config();
