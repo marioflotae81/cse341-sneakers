@@ -5,10 +5,10 @@
     "description": "Week 5-8 Personal Project",
     "version": "1.0.0"
   },
-  "host": "https://cse341-sneakers.onrender.com/",
+  "host": "https://cse341-sneakers.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "http", "https"
   ],
   "paths": {
     "/": {

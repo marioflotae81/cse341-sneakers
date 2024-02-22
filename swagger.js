@@ -6,7 +6,7 @@ const doc = {
         description: 'Week 5-8 Personal Project'
     },
     host: 'https://cse341-sneakers.onrender.com',
-    schemes: ['http']
+    schemes: ['http', 'https']
 };
 
 const outputFile = './swagger.json';
