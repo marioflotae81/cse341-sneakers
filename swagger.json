@@ -8,15 +8,76 @@
   "host": "cse341-sneakers.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http", "https"
+    "http",
+    "https"
   ],
   "paths": {
+    "/success": {
+      "get": {
+        "description": "After succesfully authorized by Google OAuth 2.0",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/home": {
+      "get": {
+        "description": "After Session is destroyed (logout)",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/failed": {
+      "get": {
+        "description": "When login fails",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "description": "It will forward you to the login window",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/google/callback": {
+      "get": {
+        "description": "It's the callback for the oauth athorization",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "description": "Route that will destroy (logout) the session.",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/": {
       "get": {
-        "description": "Home page - For testing purposes.",
+        "description": "Home Page",
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       }

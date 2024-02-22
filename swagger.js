@@ -6,6 +6,7 @@ const doc = {
         description: 'Week 5-8 Personal Project'
     },
     host: 'cse341-sneakers.onrender.com',
+    // host: 'localhost:4003',
     schemes: ['http', 'https']
 };
 

@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const database = client.db(process.env.MONGO_DB);
 const collection = database.collection(process.env.MONGO_COLLECTION);
+const sneakerCollection = database.collection(process.env.MONGO_USERS_COLLECTION);
 
 const fetchOneDoc = async (id) => {
     try {
@@ -88,10 +89,44 @@ const deleteSneaker = async (id) => {
     }
 };
 
+const updateUser = async (data) => {
+    const { sub, name, picture, email } = data;
+    
+    try {
+        await client.connect();
+
+        const result = await sneakerCollection.updateOne(
+            {
+                Email: email
+            },
+            {
+                $set: {
+                    Name: name,
+                    Email: email,
+                    Picture: picture,
+                    Sub: sub
+                }
+            },
+            { upsert: true }
+        );
+
+        if (!result) {
+            throw new Error('There was a problem.')
+        }
+
+        return result;
+
+    } catch (error) {
+        console.error(error);
+    }
+
+};
+
 module.exports = {
     fetchOneDoc,
     fetchAll,
     insertSneaker,
     updateSneaker,
     deleteSneaker,
+    updateUser,
 };

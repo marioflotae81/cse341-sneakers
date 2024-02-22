@@ -1,5 +1,5 @@
 const { client } = require('../db');
-const { fetchAll, fetchOneDoc, insertSneaker, updateSneaker, deleteSneaker } = require('../models/index');
+const { fetchAll, fetchOneDoc, insertSneaker, updateSneaker, deleteSneaker, updateUser } = require('../models/index');
 
 
 const homeRoute = (req, res) => {
@@ -33,9 +33,25 @@ const failedRoute = (req, res) => {
     res.send('Failed');
 };
 
-const successRoute = (req, res) => {
-    console.log('You are logged in!');
-    res.send(`Welcome ${req.user.displayName}`);
+const successRoute = async (req, res) => {
+    const data = req.user._json;
+
+    try {
+        const result = await updateUser(data);
+
+        if (result.acknowledged) {
+            console.log('You are logged in!');
+            // res.status(200).json({ message: "Sneaker was updated Successfully." })
+            return res.send(`Welcome ${req.user.displayName}`);
+        } else {
+            return res.status(400).json({ message: `Something went wrong updating the user with email: ${data.email}` })
+        }
+    } catch (error) {
+        console.error(error);
+    } finally {
+        client.close();
+    }
+    
 };
 
 const googleCallbackRoute = (req, res) => {
@@ -126,6 +142,8 @@ const postRoute = async (req, res) => {
         res.status(500).send({
             message: "Internal Server Error."
         })
+    } finally{ 
+        client.close();
     }
 };
 
@@ -167,6 +185,8 @@ const updateRoute = async (req, res) => {
         return res.status(500).json({
             error: 'Internal Server Error.'
         });
+    } finally{ 
+        client.close();
     }
 };
 
@@ -191,6 +211,8 @@ const deleteOneRoute = async (req, res) => {
         return res.status(500).json({
             error: 'Internal Server Error.'
         });
+    } finally{ 
+        client.close();
     }
 };
 
