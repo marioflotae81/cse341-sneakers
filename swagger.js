@@ -5,7 +5,7 @@ const doc = {
         title: 'Project 02',
         description: 'Week 5-8 Personal Project'
     },
-    host: 'https://cse341-sneakers.onrender.com',
+    host: 'cse341-sneakers.onrender.com',
     schemes: ['http', 'https']
 };
 
