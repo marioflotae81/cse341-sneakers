@@ -91,7 +91,7 @@ const deleteSneaker = async (id) => {
 
 const updateUser = async (data) => {
     const { sub, name, picture, email } = data;
-    
+    console.log(sub, name, picture, email)
     try {
         await client.connect();
 
