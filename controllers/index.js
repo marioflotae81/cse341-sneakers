@@ -10,6 +10,57 @@ const testRoute = (req, res) => {
     res.send('Testing another route.');
 };
 
+
+/**
+ * 
+ * Google OAuth routes
+ */
+
+// Middleware used in protected routes to check if the user has been authenticated
+const isLoggedIn = (req, res, next) => {
+    if (req.user) {
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+};
+
+const home = (req, res) => {
+    res.send("Home Page");
+};
+
+const failedRoute = (req, res) => {
+    res.send('Failed');
+};
+
+const successRoute = (req, res) => {
+    console.log('You are logged in!');
+    res.send(`Welcome ${req.user.displayName}`);
+};
+
+const googleCallbackRoute = (req, res) => {
+    res.redirect('/success');
+};
+
+const logoutRoute = (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.log(`Error while destroying session: ${err}`);
+        } else {
+            req.logout(() => {
+                console.log('You are logged out!');
+                res.redirect('/home');
+            });
+        }
+    });
+};
+
+
+/**
+ * 
+ * CRUD Controllers 
+ * 
+ */
 const getAllRoute = async (req, res) => {
     try {
         const data = await fetchAll();
@@ -152,4 +203,10 @@ module.exports = {
     postRoute,
     updateRoute,
     deleteOneRoute,
+    isLoggedIn,
+    home,
+    failedRoute,
+    successRoute,
+    googleCallbackRoute,
+    logoutRoute,
 };

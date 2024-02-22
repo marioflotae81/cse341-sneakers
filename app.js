@@ -4,6 +4,10 @@ const app = express();
 const { connectToMongoDB } = require('./db/index');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const session = require('express-session');
+const passport = require('passport');
+require('./passport');
+require('dotenv').config();
 
 const port = process.env.PORT || 4003;
 
@@ -12,7 +16,14 @@ app
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
     .use(express.json())
     .use(express.urlencoded({ extended: true }))
-    .use('/', require('./routes'));
+    .use(session({
+        secret: process.env.SECRET,
+        resave: false,
+        saveUninitialized: false
+    }))
+    .use(passport.initialize())
+    .use(passport.session())
+    .use('/', require('./routes'))
 
 connectToMongoDB()
     .then(() => {
