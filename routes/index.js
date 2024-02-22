@@ -5,10 +5,10 @@ const sneaker = require('./sneakers');
 require('../passport');
 
 
+routes.get('/success', controllers.isLoggedIn, controllers.successRoute);
 routes.get('/home', controllers.home);
 routes.get('/failed', controllers.failedRoute);
-routes.get('/success', controllers.isLoggedIn, controllers.successRoute);
-routes.get('/google',
+routes.get('/login',
 passport.authenticate('google', {
     scope: ['email', 'profile']
 })
@@ -24,6 +24,6 @@ controllers.googleCallbackRoute
 routes.get('/logout', controllers.logoutRoute);
 
 routes.use('/sneakers', controllers.isLoggedIn, sneaker);
-routes.get('/', controllers.homeRoute);
+routes.get('/', controllers.isLoggedIn, controllers.homeRoute);
 
 module.exports = routes;
