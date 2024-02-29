@@ -147,21 +147,21 @@ const insertUser = async (data) => {
 };
 
 const updateUser = async (data) => {
-    const { Email, Name, Picture, Sub } = data;
+    const { email, name, picture, sub } = data;
    
     try {
         await client.connect();
 
         const result = await userCollection.updateOne(
             {
-                Email: Email
+                Email: email
             },
             {
                 $set: {
-                    Email: Email,
-                    Name: Name,
-                    Picture: Picture,
-                    Sub: Sub
+                    Email: email,
+                    Name: name,
+                    Picture: picture,
+                    Sub: sub
                 }
             },
             { upsert: true }

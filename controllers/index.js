@@ -47,6 +47,7 @@ const failedRoute = (req, res) => {
 const successRoute = async (req, res) => {
     const data = req.user._json;
 
+
     try {
         const result = await updateUser(data);
 
@@ -313,10 +314,10 @@ const updateOneUser = async (req, res) => {
 
     // Create User Object
     const user = {
-        Email: req.body.Email,
-        Name: req.body.Name,
-        Picture: req.body.Picture,
-        Sub: req.body.Sub
+        email: req.body.Email,
+        name: req.body.Name,
+        picture: req.body.Picture,
+        sub: req.body.Sub
     };
 
     try {
