@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const database = client.db(process.env.MONGO_DB);
 const collection = database.collection(process.env.MONGO_COLLECTION);
-const sneakerCollection = database.collection(process.env.MONGO_USERS_COLLECTION);
+const userCollection = database.collection(process.env.MONGO_USERS_COLLECTION);
 
 const fetchOneDoc = async (id) => {
     try {
@@ -89,22 +89,79 @@ const deleteSneaker = async (id) => {
     }
 };
 
+
+/**
+ * 
+ * Users CRUD Functions
+ */
+
+const fetchOneUser = async (id) => {
+    try {
+        await client.connect();
+
+        const objectId = new ObjectId(id);
+        const result = await userCollection.findOne({_id: objectId})
+
+        if (!result) {
+            throw new Error('Document not found');
+        }
+
+        return result;
+
+    } catch (error) {
+        console.error('There was an error fecthing the User: ', error);
+
+    }
+};
+
+const fetchAllUsers = async () => {
+    try{
+        await client.connect();
+
+        const result = await userCollection.find({}).toArray();
+    
+        if (!result) {
+            throw new Error('No documents found.');
+        }
+
+        return result;
+    } catch (error) {
+        console.error('There was an error fetching docs: ', error);
+    }
+};
+
+const insertUser = async (data) => {
+    try {
+        await client.connect();
+
+        const result = await userCollection.insertOne(data);
+
+        if (!result) {
+            throw new Error('No document was inserted');
+        }
+
+        return result;
+    } catch (error) {
+        console.error('There was an error inserting the data', error);
+    }
+};
+
 const updateUser = async (data) => {
-    const { sub, name, picture, email } = data;
+    const { Email, Name, Picture, Sub } = data;
    
     try {
         await client.connect();
 
-        const result = await sneakerCollection.updateOne(
+        const result = await userCollection.updateOne(
             {
-                Email: email
+                Email: Email
             },
             {
                 $set: {
-                    Name: name,
-                    Email: email,
-                    Picture: picture,
-                    Sub: sub
+                    Email: Email,
+                    Name: Name,
+                    Picture: Picture,
+                    Sub: Sub
                 }
             },
             { upsert: true }
@@ -122,11 +179,29 @@ const updateUser = async (data) => {
 
 };
 
+const deleteUser = async (id) => {
+    try {
+        const objectId = new ObjectId(id);
+
+        await client.connect();
+
+        const result = await userCollection.deleteOne({ _id: objectId });
+
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 module.exports = {
     fetchOneDoc,
     fetchAll,
     insertSneaker,
     updateSneaker,
     deleteSneaker,
+    fetchOneUser,
+    fetchAllUsers,
+    insertUser,
     updateUser,
+    deleteUser,
 };

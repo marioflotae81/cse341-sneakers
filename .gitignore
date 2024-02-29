@@ -1,6 +1,3 @@
 node_modules
 .env
 swagger_copy.json
-swagger.js
-swagger.json
-passport.js

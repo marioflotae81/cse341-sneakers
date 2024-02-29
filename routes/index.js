@@ -2,6 +2,7 @@ const routes = require('express').Router();
 const passport = require('passport');
 const controllers = require('../controllers/index')
 const sneaker = require('./sneakers');
+const user = require('./users');
 require('../passport');
 
 
@@ -24,6 +25,7 @@ controllers.googleCallbackRoute
 routes.get('/logout', controllers.logoutRoute);
 
 routes.use('/sneakers', controllers.isLoggedIn, sneaker);
+routes.use('/users', controllers.isLoggedIn, user);
 routes.get('/', controllers.isLoggedIn, controllers.homeRoute);
 
 module.exports = routes;
